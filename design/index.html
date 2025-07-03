@@ -3,61 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <title>JDRAE | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:300,400,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body style="background-image: url('assets/background.png'); background-size: cover; background-position: center;">
     <div class="outer-container">
-
         <nav class="nav">
-            <img src="assets/search.svg"/>
-            <img src="assets/bell.svg"/>
-            <img src="assets/menu.svg"/>
+            <a class="nav-icon" href="#"><img src="assets/search.svg"/></a>
+            <a class="nav-icon" href="#"><img src="assets/bell.svg"/></a>
+            <a class="nav-icon" href="#"><img src="assets/menu.svg"/></a>
         </nav>
         <div class="inner-container">
-        <div class="main-content">
-          <div class="chart-card">
-            <img src="assets/chart_img.png" alt="Chart" class="chart-img" />
-          </div>
-        </div>
-        <aside class="sidebar">
-            <div class="box price-card">
-                <div class="price-card-top">
-                    <div class="price-card-left">
-                        <img src="assets/bitcoin.png" alt="Bitcoin" class="price-btc-icon" />
-                        <span class="price-symbol">BTCUSDT</span>
+            <div class="chart-card">
+                <img src="assets/chart_img.png" style="height: 100%" />
+            </div>
+            <aside class="sidebar">
+                <div class="sidebar-card price-card">
+                    <div class="price-card-top">
+                        <div>
+                            <img src="assets/bitcoin.png" alt="Bitcoin" style="width: 16px; height: 16px;" />
+                            <span class="small-text">BTCUSDT</span>
+                        </div>
+                        <div>
+                            <img src="assets/up-arrow.svg" alt="Up" style="width: 10px; height: 10px;" />
+                            <span class="small-text" style="color: #09A249;">0.3%</span>
+                        </div>
                     </div>
-                    <div class="price-card-right">
-                        <img src="assets/up-arrow.svg" alt="Up" class="price-up-arrow" />
-                        <span class="price-change">0.3%</span>
+                    <span class="big-text price-value">105,023</span>
+                </div>
+                <div class="sidebar-card latency-card">
+                    <span class="small-text" style="margin-bottom: 8px;">Latency</span>
+                    <span class="big-text latency-value">300ms</span>
+                </div>
+                <div class="small-box-container">
+                    <div class="small-box btc-box">
+                        <span class="medium-text btc-label">BTC</span>
+                    </div>
+                    <div class="small-box">
+                        <span class="medium-text">ETH</span>
+                    </div>
+                    <div class="small-box">
+                        <span class="medium-text">XRP</span>
                     </div>
                 </div>
-                <div class="price-card-center">
-                    <span class="price-value">105,023</span>
-                </div>
-            </div>
-            <div class="box latency-card">
-                <span class="latency-label">Latency</span>
-                <span class="latency-value">300ms</span>
-            </div>
-            <div class="box-row">
-                <div class="small-box btc-box">
-                    <span class="btc-label">BTC</span>
-                </div>
-                <div class="small-box">
-                    <span class="small-box-label">ETH</span>
-                </div>
-                <div class="small-box">
-                    <span class="small-box-label">XRP</span>
-                </div>
-            </div>
-        </aside>
+            </aside>
         </div>
     </div>
     <footer class="footer">
-        <div class="inner-footer">
-            <p>JDRAE</p>
-            <img src="assets/github.png" height="15px"/>
-        </div>
+        <p style="font-size: 14px; padding-bottom: 1px; font-weight: 300;">JDRAE</p>
+        <a href="https://github.com/jdrae" style="padding: 3px;"><img src="assets/github.svg"></a>
     </footer>
 </body>
 </html>
