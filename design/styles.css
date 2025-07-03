@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #1c1c1c;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.outer-container{
+  margin: 15vh;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.inner-container {
+  display: flex;
+}
+
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+}
+
+.inner-footer {
+  display: flex;
+  align-items: space-between;
+}
+
+.box {
+  position: relative;
+  width: 243px;
+  height: 111px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%);
+  border-radius: 16px;
+  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
+  border: 1px solid;
+  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, rgba(234,199,239,0) 75%, rgba(234,199,239,0.5) 100%) 1;
+  backdrop-filter: blur(20px);
+  margin-bottom: 16px;
+  padding: 20px;
+}
+
+/* Latency Card */
+.latency-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.latency-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1C1C1C;
+  margin-bottom: 8px;
+}
+
+.latency-value {
+  font-size: 32px;
+  font-weight: 400;
+  color: #1C1C1C;
+}
+
+/* Price Card */
+.price-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.price-card-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-btc-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.price-symbol {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1C1C1C;
+}
+
+.price-card-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.price-value {
+  font-size: 32px;
+  font-weight: 400;
+  color: #1C1C1C;
+}
+
+.price-card-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.price-up-arrow {
+  width: 10px;
+  height: 10px;
+}
+
+.price-change {
+  font-size: 13px;
+  font-weight: 400;
+  color: #09A249;
+}
+
+/* Small box */
+.box-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.small-box {
+  height: 65px;
+  width: 68px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%);
+  border-radius: 16px;
+  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
+  border: 1px solid;
+  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, rgba(234,199,239,0) 75%, rgba(234,199,239,0.5) 100%) 1;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-box-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1C1C1C;
+}
+
+.btc-box {
+  background: linear-gradient(135deg, #F2C94C 0%, #F2994A 70%);
+  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
+  border: 2px solid;
+  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, rgba(234,199,239,0) 75%, rgba(234,199,239,0.5) 100%) 1;
+  border-radius: 16px;
+
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btc-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFF;
+  font-family: 'Inter', sans-serif;
+}
+
+/* chart */
+.chart-card {
+  width: 800px;
+  height: 371px;
+  margin-right: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.7) 4.6%, rgba(255,255,255,0.5) 100%);
+  border-radius: 16px;
+  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
+  border: 1.5px solid;
+  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, #EFF4F8 75%, rgba(239,244,248,0.5) 100%) 1;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-img {
+  width: 612.5px;
+  height: 292px;
+  object-fit: contain;
+}
