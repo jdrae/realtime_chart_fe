@@ -17,11 +17,21 @@ body{
     margin: 0;
     border: 0;
     padding: 0;
-    background-image: url('assets/background/background_dark.jpg');
+    background-image: url('assets/background/background_dark_2.jpg');
     background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+}
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+div{
+  cursor: default;
 }
 
 a {
@@ -32,7 +42,7 @@ a {
 /* Transparent box */
 .transparent {
   position: relative;
-  background: linear-gradient(106deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.18));
+  background: linear-gradient(106deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.07);
@@ -42,7 +52,7 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 35%, rgba(255, 78, 149, 0.2) 70%, rgba(255, 255, 255, 0.4));
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 35%, rgba(55, 0, 179, 0.25) 80%, rgba(255, 255, 255, 0.4));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, 
   linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -199,7 +209,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   background: linear-gradient(106deg, rgba(255, 212, 0, 0.8), rgba(255, 65, 0, 0.8));
-  box-shadow: 0 0 10px 3px rgba(255, 212, 0, 0.5);
+  box-shadow: 0 0 9px 4px rgba(255, 206, 0, 0.4)
 }
 
 .btc-box::before {
