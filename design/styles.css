@@ -8,12 +8,46 @@ html, body {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 400; /* Regular */
-  color: #1c1c1c;
+  color: #efefef;
 }
 
-.light-text {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300; /* Light */
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-image: url('assets/background/background_dark.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Transparent box */
+.transparent {
+  position: relative;
+  background: linear-gradient(106deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.18));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.07);
+}
+
+.transparent::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 35%, rgba(255, 78, 149, 0.2) 70%, rgba(255, 255, 255, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+  linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Layout */
@@ -59,18 +93,17 @@ body {
   align-items: center;
 }
 
-
 /* Chart */
 .chart-card {
   padding: 40px;
   height: 400px;
   margin-right: 35px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.7) 4.6%, rgba(255,255,255,0.5) 100%);
   border-radius: 16px;
-  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
-  border: 1.5px solid;
-  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, #EFF4F8 75%, rgba(239,244,248,0.5) 100%) 1;
-  backdrop-filter: blur(20px);
+}
+
+.chart-card::before {
+  border-radius: 16px;
+  padding: 1.5px;
 }
 
 /* Sidebar */
@@ -97,14 +130,13 @@ body {
   width: 220px;
   height: 110px;
   padding: 18px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%);
   border-radius: 16px;
-  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
-  border: 1px solid;
-  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, rgba(234,199,239,0) 75%, rgba(234,199,239,0.5) 100%) 1;
-  backdrop-filter: blur(20px);
 }
 
+.sidebar-card::before {
+  border-radius: 16px;
+  padding: 1.5px;
+}
 
 
 /* Price Card */
@@ -151,33 +183,33 @@ body {
 .small-box {
   height: 59px;
   width: 62px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%);
   border-radius: 16px;
-  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
-  border: 1px solid;
-  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, rgba(234,199,239,0) 75%, rgba(234,199,239,0.5) 100%) 1;
-  backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.small-box::before {
+  padding: 1.5px;
+  border-radius: 16px;
+}
+
+/* Custom Symbol Box */
 .btc-box {
-  background: linear-gradient(135deg, #F2C94C 0%, #F2994A 70%);
-  box-shadow: 0px 0px 14px -1px rgba(128, 128, 128, 0.07);
-  border: 2px solid;
-  border-image: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%, rgba(234,199,239,0) 75%, rgba(234,199,239,0.5) 100%) 1;
-  border-radius: 16px;
-
-  backdrop-filter: blur(20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btc-label {
   font-size: 16px;
   font-weight: 600;
-  color: #FFF;
-  font-family: 'Inter', sans-serif;
+  background: linear-gradient(106deg, rgba(255, 212, 0, 0.8), rgba(255, 65, 0, 0.8));
+  box-shadow: 0 0 10px 3px rgba(255, 212, 0, 0.5);
+}
+
+.btc-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 35%, rgba(255, 78, 149, 0.2) 70%, rgba(255, 255, 255, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+  linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
