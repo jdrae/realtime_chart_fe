@@ -8,7 +8,8 @@ html, body {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 400; /* Regular */
-  color: #efefef;
+  color: #1c1c1c;
+  background-color: rgb(254, 254, 254);
 }
 
 body{
@@ -17,11 +18,6 @@ body{
     margin: 0;
     border: 0;
     padding: 0;
-    background-image: url('assets/background/background_dark_2.jpg');
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 * {
   user-select: none;
@@ -58,6 +54,15 @@ a {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+
+/*  */
+.default-card {
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #dadada;
+  border-radius: 16px;
 }
 
 /* Layout */
@@ -108,12 +113,8 @@ body {
   padding: 40px;
   height: 400px;
   margin-right: 35px;
-  border-radius: 16px;
-}
-
-.chart-card::before {
-  border-radius: 16px;
-  padding: 1.5px;
+  box-shadow: 0 4px 5px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
 }
 
 /* Sidebar */
@@ -140,12 +141,6 @@ body {
   width: 220px;
   height: 110px;
   padding: 18px;
-  border-radius: 16px;
-}
-
-.sidebar-card::before {
-  border-radius: 16px;
-  padding: 1.5px;
 }
 
 
@@ -193,33 +188,16 @@ body {
 .small-box {
   height: 59px;
   width: 62px;
-  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.small-box::before {
-  padding: 1.5px;
-  border-radius: 16px;
-}
-
 /* Custom Symbol Box */
 .btc-box {
+  color: #ffffff;
   font-size: 16px;
   font-weight: 600;
-  background: linear-gradient(106deg, rgba(255, 212, 0, 0.8), rgba(255, 65, 0, 0.8));
-  box-shadow: 0 0 9px 4px rgba(255, 206, 0, 0.4)
-}
-
-.btc-box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 35%, rgba(255, 78, 149, 0.2) 70%, rgba(255, 255, 255, 0.4));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
-  linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  border: none;
+  background: rgb(255, 149, 0);
 }
