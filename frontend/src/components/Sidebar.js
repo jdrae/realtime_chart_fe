@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import bitcoin from '../assets/bitcoin.png';
+import btcImg from '../assets/btc.png';
+import ethImg from '../assets/eth.png';
+import xrpImg from '../assets/xrp.png';
 import { io } from 'socket.io-client';
 
-const PriceCard = ({ price }) => (
+const PriceCard = ({ price, coinImg, coinName }) => (
   <div className="price-card sidebar-card default-card">
     <div className="price-card-top">
       <div>
-        <img src={bitcoin} alt="Bitcoin" style={{ width: 16, height: 16 }} />
-        <span className="small-text">BTCUSDT</span>
+        <img src={coinImg} style={{ width: 16, height: 16 }} />
+        <span className="small-text">{coinName}</span>
       </div>
     </div>
     <span className="big-text price-value">{price}</span>
@@ -21,8 +23,8 @@ const LatencyCard = ({ latency }) => (
   </div>
 );
 
-const SmallBox = ({ label, className }) => (
-  <a href="#" className={`small-box default-card ${className || ''}`.trim()}>
+const SmallBox = ({ label, className, onClick }) => (
+  <a href="#" className={`small-box default-card ${className}`} onClick={onClick}>
     <span className="medium-text">{label}</span>
   </a>
 );
@@ -30,35 +32,59 @@ const SmallBox = ({ label, className }) => (
 const Sidebar = () => {
   const [price, setPrice] = useState('');
   const [latency, setLatency] = useState('');
+  const [selectedCoin, setSelectedCoin] = useState('BTC');
+  const [coinImg, setCoinImg] = useState(btcImg);
 
   useEffect(() => {
+    const topic = `${selectedCoin}USDT`;
     const socket = io('http://localhost:5555');
+
     socket.on('connect', () => {
       console.log('Socket connected:', socket.id);
-      socket.emit("subscribe", { topic: "btc" });
+      socket.emit("subscribe", { topic });
     });
+    
     socket.on("message", (data) => {
       const price = Number(data['data']['k']['c']).toFixed(2);
       const latency = Date.now() - data["received_at"];
       setPrice(price);
       setLatency(latency);
     });
+    
     return () => {
-      socket.on("disconnect", () => {
-        console.log("Socket disconnected");
-      });
       socket.disconnect();
     };
-  }, []);
+  }, [selectedCoin]);
+
+  const handleCoinClick = (coin) => {
+    setSelectedCoin(coin);
+    if (coin === 'BTC') setCoinImg(btcImg);
+    else if (coin === 'ETH') setCoinImg(ethImg);
+    else if (coin === 'XRP') setCoinImg(xrpImg);
+  };
+
+  const coinName = `${selectedCoin}USDT`;
 
   return (
     <aside className="sidebar">
-      <PriceCard price={price} />
+      <PriceCard price={price} coinImg={coinImg} coinName={coinName} />
       <LatencyCard latency={latency} />
       <div className="small-box-container">
-        <SmallBox label="BTC" className="btc-box" />
-        <SmallBox label="ETH" />
-        <SmallBox label="XRP" />
+        <SmallBox
+          label="BTC"
+          className={selectedCoin === 'BTC' ? 'btc-box' : ''}
+          onClick={() => handleCoinClick('BTC')}
+        />
+        <SmallBox
+          label="ETH"
+          className={selectedCoin === 'ETH' ? 'eth-box' : ''}
+          onClick={() => handleCoinClick('ETH')}
+        />
+        <SmallBox
+          label="XRP"
+          className={selectedCoin === 'XRP' ? 'xrp-box' : ''}
+          onClick={() => handleCoinClick('XRP')}
+        />
       </div>
     </aside>
   );
