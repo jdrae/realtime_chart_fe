@@ -4,24 +4,54 @@ import ethImg from '../assets/eth.png';
 import xrpImg from '../assets/xrp.png';
 import { io } from 'socket.io-client';
 
-const PriceCard = ({ price, coinImg, coinName }) => (
+const PriceCard = ({ price, coinImg, coinName, numTrades }) => (
   <div className="price-card sidebar-card default-card">
     <div className="price-card-top">
       <div>
         <img src={coinImg} style={{ width: 16, height: 16 }} />
         <span className="small-text">{coinName}</span>
       </div>
+      <div className="small-text" style={{ color: '#777777' }}>
+        <span>{numTrades} trades</span>
+      </div>
     </div>
     <span className="big-text price-value">{price}</span>
   </div>
 );
 
-const LatencyCard = ({ latency }) => (
-  <div className="latency-card sidebar-card default-card">
-    <span className="small-text" style={{ marginBottom: 8 }}>Latency</span>
-    <span className="big-text latency-value">{latency}ms</span>
-  </div>
-);
+const LatencyCard = ({ latency }) => {
+  const [showTooltip, setShowTooltip] = React.useState(false);
+  return (
+    <div
+      className="latency-card sidebar-card default-card"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      style={{ position: 'relative' }}
+    >
+      <span className="small-text" style={{ marginBottom: 8 }}>Latency</span>
+      <span className="big-text latency-value">{latency}ms</span>
+      {showTooltip && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '100%',
+            marginLeft: 12,
+            transform: 'translateY(-50%)',
+            background: '#222',
+            color: '#fff',
+            width: 200,
+            padding: 10,
+            borderRadius: 6,
+            fontSize: 12,
+          }}
+        >
+          Time difference between when the backend receives data from Binance via WebSocket and when the frontend receives that data from the backend.
+        </div>
+      )}
+    </div>
+  );
+};
 
 const SmallBox = ({ label, className, onClick }) => (
   <a href="#" className={`small-box default-card ${className}`} onClick={onClick}>
@@ -34,21 +64,26 @@ const Sidebar = () => {
   const [latency, setLatency] = useState('');
   const [selectedCoin, setSelectedCoin] = useState('BTC');
   const [coinImg, setCoinImg] = useState(btcImg);
+  const [numTrades, setNumTrades] = useState(0);
 
   useEffect(() => {
-    const topic = `${selectedCoin}USDT`;
+    const stream = `${selectedCoin}USDT`;
     const socket = io('http://localhost:5555');
 
     socket.on('connect', () => {
       console.log('Socket connected:', socket.id);
-      socket.emit("subscribe", { topic });
+      socket.emit("subscribe", {stream});
     });
     
     socket.on("message", (data) => {
-      const price = Number(data['data']['k']['c']).toFixed(2);
+      let decimalPlaces = 2;
+      if (selectedCoin === 'ETH') decimalPlaces = 3;
+      else if (selectedCoin === 'XRP') decimalPlaces = 4;
+      const price = Number(data['data']['k']['c']).toFixed(decimalPlaces);
       const latency = Date.now() - data["received_at"];
       setPrice(price);
       setLatency(latency);
+      setNumTrades(data['data']['k']['n']);
     });
     
     return () => {
@@ -67,7 +102,7 @@ const Sidebar = () => {
 
   return (
     <aside className="sidebar">
-      <PriceCard price={price} coinImg={coinImg} coinName={coinName} />
+      <PriceCard price={price} coinImg={coinImg} coinName={coinName} numTrades={numTrades} />
       <LatencyCard latency={latency} />
       <div className="small-box-container">
         <SmallBox
