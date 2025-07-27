@@ -59,10 +59,9 @@ const SmallBox = ({ label, className, onClick }) => (
   </a>
 );
 
-const Sidebar = () => {
+const Sidebar = ({ selectedCoin, setSelectedCoin }) => {
   const [price, setPrice] = useState('');
   const [latency, setLatency] = useState('');
-  const [selectedCoin, setSelectedCoin] = useState('BTC');
   const [coinImg, setCoinImg] = useState(btcImg);
   const [numTrades, setNumTrades] = useState(0);
 
