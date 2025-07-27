@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import {
-  ComposedChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer
+  ComposedChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar
 } from 'recharts';
 
 // --- 상수 ---
@@ -32,7 +32,8 @@ const fetchInitialDataFromAPI = async (symbol, now) => {
       const time = getTimeLabel(new Date(item.start_time));
       return {
         time,
-        openPrice: Number(item.open_price).toFixed(2)
+        openPrice: Number(item.open_price).toFixed(2),
+        volume: Number(item.volume_base).toFixed(5),
       };
     });
     result.sort((a, b) => a.time.localeCompare(b.time));
@@ -56,7 +57,8 @@ const fetchNextDataPointFromAPI = async (symbol, now) => {
     const time = getTimeLabel(new Date(item.start_time));
     return {
       time,
-      openPrice: Number(item.open_price).toFixed(2)
+      openPrice: Number(item.open_price).toFixed(2),
+      volume: Number(item.volume_base).toFixed(5),
     };
   } catch (e) {
     console.error('API fetch error:', e);
@@ -138,6 +140,17 @@ const ChartCard = ({ symbol }) => {
     <div className="chart-card default-card">
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+          {/* Histogram Bar occupying 1/4 of the chart height */}
+          <Bar
+            dataKey="volume"
+            fill="#b0c4de"
+            barSize={20}
+            yAxisId="volume"
+            isAnimationActive={false}
+            opacity={0.5}
+            radius={[4, 4, 0, 0]}
+            maxBarSize={30}
+          />
           <XAxis
             dataKey="time"
             ticks={data.map(d => d.time)}
