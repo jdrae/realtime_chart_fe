@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import btcImg from '../assets/btc.png';
 import ethImg from '../assets/eth.png';
-import xrpImg from '../assets/xrp.png';
 import { io } from 'socket.io-client';
 
 const PriceCard = ({ price, coinImg, coinName, numTrades }) => (
@@ -76,7 +75,6 @@ const Sidebar = ({ selectedCoin, setSelectedCoin }) => {
     socket.on("message", (data) => {
       let decimalPlaces = 2;
       if (selectedCoin === 'ETH') decimalPlaces = 3;
-      else if (selectedCoin === 'XRP') decimalPlaces = 4;
       const price = Number(data['data']['k']['c']).toFixed(decimalPlaces);
       const latency = Date.now() - data["received_at"];
       setPrice(price);
@@ -93,7 +91,6 @@ const Sidebar = ({ selectedCoin, setSelectedCoin }) => {
     setSelectedCoin(coin);
     if (coin === 'BTC') setCoinImg(btcImg);
     else if (coin === 'ETH') setCoinImg(ethImg);
-    else if (coin === 'XRP') setCoinImg(xrpImg);
   };
 
   const coinName = `${selectedCoin}USDT`;
@@ -113,11 +110,7 @@ const Sidebar = ({ selectedCoin, setSelectedCoin }) => {
           className={selectedCoin === 'ETH' ? 'eth-box' : ''}
           onClick={() => handleCoinClick('ETH')}
         />
-        <SmallBox
-          label="XRP"
-          className={selectedCoin === 'XRP' ? 'xrp-box' : ''}
-          onClick={() => handleCoinClick('XRP')}
-        />
+        <div class="small-box default-card empty-small-box"><span>🚀</span></div>
       </div>
     </aside>
   );

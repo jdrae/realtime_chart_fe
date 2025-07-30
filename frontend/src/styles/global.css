@@ -174,10 +174,8 @@ body {
   background: rgb(104, 126, 227);
 } 
 
-.xrp-box {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
+.empty-small-box {
+  font-size: 27px;
   border: none;
-  background: rgb(9, 172, 178);
-} 
+  background: none;
+}
