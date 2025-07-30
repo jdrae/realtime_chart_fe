@@ -66,7 +66,7 @@ const Sidebar = ({ selectedCoin, setSelectedCoin }) => {
 
   useEffect(() => {
     const stream = `${selectedCoin}USDT`;
-    const socket = io('http://127.0.0.1:5000');
+    const socket = io(process.env.REACT_APP_SOCKET_URL);
 
     socket.on('connect', () => {
       socket.emit("subscribe", {stream});
