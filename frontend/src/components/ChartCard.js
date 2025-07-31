@@ -22,10 +22,8 @@ const ChartCard = ({ symbol }) => {
       if (!nextData) return;
       setData(prevData => {
         if (prevData.length < DATA_LENGTH) {
-          console.log("append!")
           return [...prevData, nextData];
         } else {
-          console.log("slice")
           return [...prevData.slice(1), nextData];
         }
       });
