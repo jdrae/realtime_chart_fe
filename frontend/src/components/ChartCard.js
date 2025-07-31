@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import {
   ComposedChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar
 } from 'recharts';
-import { Y_TICK_COUNT, UPDATE_INTERVAL_MS } from './ChartCard/constants';
+import { Y_TICK_COUNT, UPDATE_INTERVAL_MS, DATA_LENGTH } from './ChartCard/constants';
 import { getInitialNow } from './ChartCard/utils';
 import { fetchInitialDataFromAPI, fetchNextDataPointFromAPI, updateLastVolume } from './ChartCard/api';
 
@@ -20,7 +20,15 @@ const ChartCard = ({ symbol }) => {
     const now = new Date();
     fetchNextDataPointFromAPI(symbol, now).then(nextData => {
       if (!nextData) return;
-      setData(prevData => [...prevData.slice(1), nextData]);
+      setData(prevData => {
+        if (prevData.length < DATA_LENGTH) {
+          console.log("append!")
+          return [...prevData, nextData];
+        } else {
+          console.log("slice")
+          return [...prevData.slice(1), nextData];
+        }
+      });
     });
   }, [symbol]);
 
@@ -57,12 +65,14 @@ const ChartCard = ({ symbol }) => {
     if (msToNextMinute5 < 0) msToNextMinute5 += 60000;
 
     timeoutRef.current = setTimeout(async () => {
-      const updateNow = new Date();
-      await updateLastVolume(symbol, updateNow, setData);
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - 1);
+      await updateLastVolume(symbol, now, setData);
       appendNextData();
       intervalRef.current = setInterval(async () => {
-        const updateNow = new Date();
-        await updateLastVolume(symbol, updateNow, setData);
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - 1);
+        await updateLastVolume(symbol, now, setData);
         appendNextData();
       }, UPDATE_INTERVAL_MS);
     }, msToNextMinute5);

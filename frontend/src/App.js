@@ -36,16 +36,18 @@ function App() {
     checkHealth();
   }, []);
 
+  if (showOops) {
+    return <OopsModal />;
+  }
   return (
-    <>
-      {showOops && <OopsModal />}
+    <div className="outer-container">
       <NavBar />
       <div className="inner-container">
         <ChartCard symbol={selectedCoin} />
         <Sidebar selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

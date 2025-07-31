@@ -3,10 +3,10 @@ import { apiTimestamp, getTimeLabel } from './utils';
 
 export const fetchInitialDataFromAPI = async (symbol, now) => {
   const interval = INTERVAL;
-  const limit = DATA_LENGTH;
+  const limit = DATA_LENGTH - 1; // 1개는 nextDatapoint 에서 append
   const nowUtcSec = apiTimestamp(now) - 60;
   const symbolStr = symbol + 'USDT';
-  const url = `${SERVER}/api/aggregatedkline/?symbol=${symbolStr}&interval=${interval}&timestamp=${nowUtcSec}&limit=${limit}`;
+  const url = `${SERVER}/api/aggregatedkline/list/?symbol=${symbolStr}&interval=${interval}&timestamp=${nowUtcSec}&limit=${limit}`;
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error('API error');
@@ -46,11 +46,10 @@ export const updateLastVolume = async (symbol, now, setData) => {
   try {
     const nowUtcSec = apiTimestamp(now);
     const symbolStr = symbol + 'USDT';
-    const url = `${SERVER}/api/aggregatedkline/?symbol=${symbolStr}&interval=${INTERVAL}&timestamp=${nowUtcSec}&limit=1`;
+    const url = `${SERVER}/api/aggregatedkline/detail/?symbol=${symbolStr}&interval=${INTERVAL}&timestamp=${nowUtcSec}`;
     const res = await fetch(url);
     if (!res.ok) throw new Error('API error');
-    const result = await res.json();
-    const item = result[0];
+    const item = await res.json();
     const newVolume = Number(item.volume_base).toFixed(5);
     setData(prevData => {
       if (!prevData.length) return prevData;
