@@ -46,9 +46,18 @@ function App() {
         <ChartCard symbol={selectedCoin} />
         <Sidebar selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
       </div>
+      <div className="site-explanation">
+        <p>
+          *Data is retrieved from the Binance WebSocket every second. The chart may differ from the official Binance chart because the data is aggregated into 1-minute intervals in this project.
+        </p>
+        <p>
+          **Latency refers to the time difference between when the data is first received by the backend server and when it is subsequently received by the frontend.
+        </p>
+      </div>
       <Footer />
     </div>
   );
+  
 }
 
 export default App;

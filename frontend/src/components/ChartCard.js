@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import {
   ComposedChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar
 } from 'recharts';
-import { Y_TICK_COUNT, UPDATE_INTERVAL_MS, DATA_LENGTH } from './ChartCard/constants';
+import { Y_TICK_COUNT, UPDATE_INTERVAL_MS, DATA_LENGTH, FETCH_WAIT_MS } from './ChartCard/constants';
 import { getInitialNow } from './ChartCard/utils';
 import { fetchInitialDataFromAPI, fetchNextDataPointFromAPI, updateLastVolume } from './ChartCard/api';
 
@@ -56,7 +56,7 @@ const ChartCard = ({ symbol }) => {
 
   useEffect(() => {
     const now = initialNowRef.current;
-    let msToNextMinute5 = (60 - now.getSeconds()) * 1000 - now.getMilliseconds() + 5000;
+    let msToNextMinute5 = (60 - now.getSeconds()) * 1000 - now.getMilliseconds() + FETCH_WAIT_MS;
     if (now.getSeconds() < 5) {
       msToNextMinute5 -= 60000;
     }

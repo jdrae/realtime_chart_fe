@@ -19,35 +19,10 @@ const PriceCard = ({ price, coinImg, coinName, numTrades }) => (
 );
 
 const LatencyCard = ({ latency }) => {
-  const [showTooltip, setShowTooltip] = React.useState(false);
   return (
-    <div
-      className="latency-card sidebar-card default-card"
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
-      style={{ position: 'relative' }}
-    >
+    <div className="latency-card sidebar-card default-card">
       <span className="small-text" style={{ marginBottom: 8 }}>Latency</span>
       <span className="big-text latency-value">{latency}ms</span>
-      {showTooltip && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '100%',
-            marginLeft: 12,
-            transform: 'translateY(-50%)',
-            background: '#222',
-            color: '#fff',
-            width: 200,
-            padding: 10,
-            borderRadius: 6,
-            fontSize: 12,
-          }}
-        >
-          Time difference between when the backend receives data from Binance via WebSocket and when the frontend receives that data from the backend.
-        </div>
-      )}
     </div>
   );
 };
@@ -76,7 +51,7 @@ const Sidebar = ({ selectedCoin, setSelectedCoin }) => {
       let decimalPlaces = 2;
       if (selectedCoin === 'ETH') decimalPlaces = 3;
       const price = Number(data['data']['k']['c']).toFixed(decimalPlaces);
-      const latency = Date.now() - data["received_at"];
+      const latency = Math.abs(Date.now() - data["received_at"]);
       setPrice(price);
       setLatency(latency);
       setNumTrades(data['data']['k']['n']);
